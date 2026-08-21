@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malta Tour · Ads · Return</title>
+<style>
+  :root {
+    --bg:#071018; --panel:rgba(255,255,255,0.045); --line:rgba(255,255,255,0.08);
+    --gold:#e8c47a; --teal:#3ecfb2; --ink:#eef6f4; --dim:#8aa3a0; --coral:#ff8a6b;
+    --blue:#7eb6ff; --lilac:#c9a0ff; --mint:#9ad7c2; --sand:#f2d0a4;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  html,body { background:var(--bg); color:var(--ink); font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif; }
+  body {
+    min-height:100vh;
+    background:
+      radial-gradient(1200px 600px at 10% -10%, rgba(62,207,178,0.12), transparent 55%),
+      radial-gradient(900px 500px at 110% 10%, rgba(232,196,122,0.10), transparent 50%),
+      linear-gradient(180deg, #0b1a22 0%, #071018 40%, #06141c 100%);
+    padding:40px 28px 72px;
+  }
+  .wrap { max-width:1180px; margin:0 auto; }
+  header { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:28px; }
+  .eyebrow { letter-spacing:.22em; text-transform:uppercase; color:var(--gold); font-size:11px; font-family:var(--sans); }
+  h1 { font-weight:400; font-size:42px; line-height:1.05; margin-top:8px; }
+  h1 em { font-style:italic; color:var(--teal); }
+  .meta { color:var(--dim); font-size:14px; text-align:right; font-family:var(--sans); line-height:1.55; }
+  .kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:14px; }
+  .kpis.sub { grid-template-columns:repeat(4,1fr); }
+  .card {
+    background:var(--panel); border:1px solid var(--line); border-radius:18px;
+    padding:18px 18px 16px; backdrop-filter: blur(10px);
+  }
+  .card.hero-zwrot { border-color: rgba(62,207,178,.35); box-shadow: 0 0 0 1px rgba(62,207,178,.08) inset; }
+  .card.hero-roas { border-color: rgba(232,196,122,.32); }
+  .card.hero-zysk { border-color: rgba(62,207,178,.22); }
+  .card .l { font-family:var(--sans); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--dim); }
+  .card .v { font-size:32px; margin-top:10px; letter-spacing:-0.03em; font-variant-numeric: tabular-nums; }
+  .card .v.teal { color:var(--teal); }
+  .card .v.gold { color:var(--gold); }
+  .card .s { font-family:var(--sans); color:var(--dim); font-size:12px; margin-top:6px; line-height:1.4; }
+  .grid { display:grid; grid-template-columns: 1.45fr .9fr; gap:14px; margin:14px 0; }
+  .grid.charts { grid-template-columns: 1fr; }
+  .grid.split { grid-template-columns: 1.2fr .8fr; }
+  h2 { font-size:18px; font-weight:400; margin-bottom:6px; }
+  .hrow { display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin-bottom:10px; flex-wrap:wrap; }
+  .legend-inline { display:flex; gap:14px; flex-wrap:wrap; font-family:var(--sans); font-size:11px; color:var(--dim); }
+  .legend-inline span { display:flex; align-items:center; gap:6px; }
+  .dot { width:8px; height:8px; border-radius:99px; display:inline-block; }
+  .chip { font-family:var(--sans); font-size:10px; letter-spacing:.12em; padding:3px 8px; border-radius:99px; }
+  .chip.live { background:rgba(62,207,178,.15); color:#8af0d8; }
+  .chip.pause { background:rgba(255,255,255,.06); color:#9bb; }
+  table { width:100%; border-collapse:collapse; font-family:var(--sans); font-size:13px; }
+  th { text-align:left; color:var(--dim); font-weight:500; font-size:10px; letter-spacing:.14em; text-transform:uppercase; padding:8px 8px 10px; border-bottom:1px solid var(--line); }
+  th.num, td.num { text-align:right; font-variant-numeric: tabular-nums; }
+  td { padding:11px 8px; border-bottom:1px solid var(--line); vertical-align:middle; }
+  tr.win td { background: rgba(62,207,178,.06); }
+  tr.win td:first-child { box-shadow: inset 3px 0 0 var(--gold); }
+  .cname { max-width:320px; }
+  .bar { height:6px; background:rgba(255,255,255,.06); border-radius:99px; overflow:hidden; min-width:64px; }
+  .bar i { display:block; height:100%; background:linear-gradient(90deg, var(--gold), var(--teal)); border-radius:99px; }
+  .muted { color:var(--dim); }
+  .teal { color:var(--teal); }
+  .gold { color:var(--gold); }
+  .blue { color:var(--blue); }
+  .donut-wrap { display:flex; gap:22px; align-items:center; }
+  .donut-svg { flex:0 0 auto; }
+  .legend { list-style:none; font-family:var(--sans); font-size:12px; color:var(--dim); flex:1; }
+  .legend li { display:flex; align-items:center; gap:8px; margin:7px 0; cursor:default; }
+  .legend li:hover { color:var(--ink); }
+  .legend i { width:8px; height:8px; border-radius:99px; display:inline-block; flex:0 0 auto; }
+  .legend .nm { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .legend b { margin-left:8px; color:var(--ink); font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; }
+  .ads { display:flex; flex-direction:column; gap:0; }
+  .ad { padding:12px 0; border-bottom:1px solid var(--line); }
+  .ad.buyer { background: rgba(62,207,178,.05); margin:0 -12px; padding:12px; border-radius:12px; border-bottom:none; margin-bottom:6px; }
+  .ad-top { display:flex; justify-content:space-between; gap:12px; font-family:var(--sans); font-size:13px; align-items:baseline; }
+  .ad-sub { color:var(--dim); font-size:12px; margin-top:4px; font-family:var(--sans); }
+  .ad-metrics { display:flex; gap:14px; margin-top:6px; font-family:var(--sans); font-size:12px; flex-wrap:wrap; }
+  .ad-metrics b { color:var(--ink); font-weight:500; }
+  .funnel { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+  .funnel .step { text-align:center; padding:12px 8px; background:rgba(255,255,255,.03); border-radius:14px; border:1px solid var(--line); }
+  .funnel .n { font-size:22px; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; }
+  .funnel .lab { font-family:var(--sans); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim); margin-top:4px; }
+  .funnel .conv { font-family:var(--sans); font-size:11px; color:var(--gold); margin-top:6px; }
+
+  .chart-switch {
+    display:flex; gap:0; margin:0 0 12px;
+    background:rgba(255,255,255,.04);
+    border:1px solid var(--line);
+    border-radius:999px; padding:3px;
+    width:fit-content; max-width:100%;
+    font-family:var(--sans);
+  }
+  .chart-switch button {
+    appearance:none; border:0; background:transparent;
+    color:var(--dim); font:500 12px var(--sans);
+    padding:7px 14px; border-radius:999px; cursor:pointer;
+    letter-spacing:.02em; white-space:nowrap;
+  }
+  .chart-switch button:hover { color:var(--ink); }
+  .chart-switch button.on {
+    background:rgba(232,196,122,.18); color:var(--gold);
+  }
+  .chart-box { position:relative; }
+  canvas { width:100%; height:260px; display:block; cursor:crosshair; }
+  canvas.roas { height:200px; }
+  canvas.clicks { height:180px; }
+  .tip .row b.blue { color:var(--blue); }
+  .tip {
+    position:absolute; pointer-events:none; display:none; z-index:8;
+    background:#0d1c24; border:1px solid rgba(255,255,255,.14);
+    padding:10px 12px; border-radius:12px; min-width:188px;
+    font-family:var(--sans); font-size:12px; color:var(--ink);
+    box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  }
+  .tip .td { color:var(--gold); font-size:11px; letter-spacing:.08em; text-transform:uppercase; margin-bottom:6px; }
+  .tip .row { display:flex; justify-content:space-between; gap:16px; margin:3px 0; color:var(--dim); }
+  .tip .row b { color:var(--ink); font-weight:500; font-variant-numeric:tabular-nums; }
+  .tip .row b.teal { color:var(--teal); }
+  .tip .row b.gold { color:var(--gold); }
+  .tip .note { margin-top:6px; color:var(--coral); font-size:11px; }
+  .callout {
+    font-family:var(--sans); font-size:13px; color:var(--dim);
+    padding:12px 14px; border-radius:14px; border:1px solid var(--line);
+    background:rgba(232,196,122,.06); margin-top:10px; line-height:1.5;
+  }
+  .callout strong { color:var(--ink); font-weight:500; }
+  footer { margin-top:28px; color:var(--dim); font-size:12px; font-family:var(--sans); line-height:1.55; }
+  .warn { color:var(--coral); }
+
+  .chip.wa { background:rgba(37,211,102,.18); color:#8dffb6; }
+  .chip.msg { background:rgba(126,182,255,.18); color:#b7d4ff; }
+  .chip.sales { background:rgba(62,207,178,.15); color:#8af0d8; }
+  .chip.video { background:rgba(255,255,255,.06); color:#9bb; }
+  .card.hero-msg { border-color: rgba(37,211,102,.32); }
+  .split2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px; }
+  .msg-stat { padding:14px 16px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.03); }
+  .msg-stat .n { font-size:28px; letter-spacing:-0.03em; font-variant-numeric:tabular-nums; }
+  .msg-stat .lab { font-family:var(--sans); font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--dim); margin-bottom:6px; }
+  .msg-stat .s { font-family:var(--sans); font-size:12px; color:var(--dim); margin-top:6px; }
+  @media (max-width: 980px) {
+    .kpis, .kpis.sub, .grid, .grid.split, .funnel, .split2 { grid-template-columns:1fr 1fr; }
+    header { flex-direction:column; align-items:flex-start; }
+    .meta { text-align:left; }
+    h1 { font-size:34px; }
+  }
+  @media (max-width: 640px) {
+    .kpis, .kpis.sub, .funnel { grid-template-columns:1fr; }
+    body { padding:24px 16px 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Malta Tour · Meta Ads</div>
+      <h1>Comino, Gozo,<br><em>and cash in one window.</em></h1>
+    </div>
+    <div class="meta">
+      alta_tour_ads · ACTIVE<br>
+      Pixel malta-tour.com<br>
+      Snapshot 21 Aug 2026, 10:13 MT<br>
+      Account since 14 Jun 2026 · 65 days<br>
+      Window: 16 Jun – 20 Aug 2026
+    </div>
+  </header>
+
+  <section class="kpis">
+    <div class="card hero-zwrot">
+      <div class="l">Return</div>
+      <div class="v teal">$535.46</div>
+      <div class="s">purchase revenue · 9 bookings</div>
+    </div>
+    <div class="card hero-roas">
+      <div class="l">ROAS</div>
+      <div class="v gold">1.54x</div>
+      <div class="s">omni_purchase 1.538 · Video Booking 2.81x</div>
+    </div>
+    <div class="card hero-zysk">
+      <div class="l">Profit</div>
+      <div class="v teal">$187.28</div>
+      <div class="s">return − spend · $535.46 − $348.18</div>
+    </div>
+    <div class="card">
+      <div class="l">Spend</div>
+      <div class="v">$348.18</div>
+      <div class="s">lifetime = last 90d · last 7 cal. days $55.22</div>
+    </div>
+  </section>
+
+  <section class="kpis sub">
+    <div class="card"><div class="l">Purchases</div><div class="v">9</div><div class="s">cost / purchase $38.69 · avg. basket $59.50</div></div>
+    <div class="card"><div class="l">CTR · CPC</div><div class="v">3.39%</div><div class="s">CPC $0.083 · CPM $2.81 · 4,205 clicks</div></div>
+    <div class="card"><div class="l">Reach</div><div class="v">65,045</div><div class="s">124,007 impressions · 1.91 freq</div></div>
+    <div class="card hero-msg"><div class="l">Messages</div><div class="v">483</div><div class="s">310 Messenger · 173 WhatsApp · $66.28 spend · not return</div></div>
+  </section>
+
+  <section class="card" style="margin-bottom:14px;">
+    <div class="hrow">
+      <div>
+        <h2>Funnel (counts, not cash)</h2>
+        <div class="s" style="margin:0;font-family:var(--sans);color:var(--dim);font-size:12px;">Meta checkout / lead value is not return.</div>
+      </div>
+    </div>
+    <div class="funnel" id="funnel"></div>
+    <div class="callout" style="background:rgba(255,138,107,.07);border-color:rgba(255,138,107,.25);">
+      <span class="warn">Not cash:</span>
+      Meta assigned <strong>$6,593</strong> to 36 checkouts and <strong>$4,409</strong> to 24 onsite leads.
+      That is not money in the bank. Return = <strong>purchase $535.46</strong> only.
+    </div>
+  </section>
+
+
+  <section class="card" style="margin-bottom:14px;">
+    <div class="hrow">
+      <div>
+        <h2>Click-to-message</h2>
+        <div class="s" style="margin:0;font-family:var(--sans);color:var(--dim);font-size:12px;">Click-to-message CTAs in Ads. The site pixel fires Contact only after marketing consent (65 since June).</div>
+      </div>
+    </div>
+    <div class="split2" id="msgSplit"></div>
+    <div class="callout" style="background:rgba(37,211,102,.07);border-color:rgba(37,211,102,.28);">
+      <strong>483 clicks</strong> into messages for <strong>$66.28</strong>.
+      Ads Graph reports the click, not “conversation started”. On-site Contact fires after Accept all (custom conversion is already live).
+      A separate funnel next to the 9 purchases.
+    </div>
+  </section>
+  <section class="card" style="margin-bottom:14px;">
+    <div class="hrow">
+      <div>
+        <h2>Spend, return and clicks</h2>
+        <div class="s" id="chartBlurb" style="margin:0;font-family:var(--sans);color:var(--dim);font-size:12px;">Hover a day. Spend and click lines stay continuous across gaps.</div>
+      </div>
+      <div class="legend-inline" id="chartLegend">
+        <span><i class="dot" style="background:var(--gold)"></i> Spend</span>
+        <span><i class="dot" style="background:var(--teal)"></i> Return</span>
+        <span><i class="dot" style="background:var(--blue)"></i> Clicks</span>
+        <span><i class="dot" style="background:var(--coral)"></i> Purchase</span>
+      </div>
+    </div>
+    <div class="chart-switch" id="chartSwitch">
+      <button type="button" data-mode="kombi" class="on">Combo</button>
+      <button type="button" data-mode="suma">Cumulative</button>
+      <button type="button" data-mode="indeks">Index</button>
+      <button type="button" data-mode="kalendarz">Calendar</button>
+    </div>
+    <div class="chart-box">
+      <canvas id="chartMoney" width="1100" height="260"></canvas>
+      <div class="tip" id="tipMoney"></div>
+    </div>
+    <div class="s" id="chartFoot" style="margin-top:8px;">16 Jun → 20 Aug · gold = spend, blue = clicks (own scale), bars = return.</div>
+  </section>
+
+  <section class="grid split">
+    <div class="card">
+      <div class="hrow">
+        <div>
+          <h2>Daily ROAS</h2>
+          <div class="s" style="margin:0;font-family:var(--sans);color:var(--dim);font-size:12px;">Bars only on days with spend. 1.0x = break-even, 1.54x = account.</div>
+        </div>
+        <div class="legend-inline">
+          <span><i class="dot" style="background:var(--gold)"></i> 1.54x account</span>
+          <span><i class="dot" style="background:rgba(255,255,255,.35)"></i> 1.0x</span>
+        </div>
+      </div>
+      <div class="chart-box">
+        <canvas id="chartRoas" class="roas" width="700" height="200"></canvas>
+        <div class="tip" id="tipRoas"></div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Where the dollars went</h2>
+      <div class="donut-wrap">
+        <div class="donut-svg" id="donut"></div>
+        <ul class="legend" id="donutLegend"></ul>
+      </div>
+      <div class="s" style="margin-top:8px;">Hover the ring: campaign spend and return.</div>
+    </div>
+  </section>
+
+  <section class="card" style="margin:14px 0; overflow-x:auto;">
+    <div class="hrow">
+      <h2>Campaigns</h2>
+      <div class="s" style="margin:0;font-family:var(--sans);">Sorted by return. Video Booking won 9–0.</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Goal</th>
+          <th>Status</th>
+          <th class="num">Spend</th>
+          <th class="num">Msgs</th>
+          <th class="num">Return</th>
+          <th></th>
+          <th class="num">ROAS</th>
+          <th class="num">Purchases</th>
+          <th class="num">Clicks</th>
+          <th class="num">CTR</th>
+          <th class="num">CPC</th>
+        </tr>
+      </thead>
+      <tbody id="campBody"></tbody>
+    </table>
+    <div class="callout">
+      All return (<strong>$535.46</strong>, 9 purchases) came from <strong>Video Booking</strong> ($190.77 → 2.81x).
+      <strong>$66.28</strong> went to Messenger/WhatsApp (483 clicks, not purchases).
+      <strong>$91.13</strong> on video/other with no return.
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="hrow">
+      <h2>Creatives by return</h2>
+      <div class="s" style="margin:0;font-family:var(--sans);">Not by spend. Three Olek UGCs bought everything.</div>
+    </div>
+    <div class="ads" id="adsList"></div>
+  </section>
+
+  <footer>
+    Read-only Graph API dump (21 Aug 2026 ~10:13 MT). Nothing is published from this view, budgets untouched, card and token are not shown.<br>
+    Headline = lifetime / last 90d through <strong>20 Aug</strong>. 21 Aug is in-flight in the calendar file ($19.24 spend / $64.92 return / 2 purchases) and is <em>not</em> in the $348.18 / $535.46 / 1.54x KPIs.<br>
+    Return = action_values <code>purchase</code> / <code>omni_purchase</code>. Lead $4,409 and checkout $6,593 are Meta-assigned values, not booking revenue. Messages = Messenger/WhatsApp CTA clicks (483), not conversations and not purchases.
+  </footer>
+</div>
+
+<script>
+const DATA = {"meta":{"account":"alta_tour_ads","currency":"USD","pixel":"malta-tour.com","snapshot":"21 Aug 2026, 10:13 MT","from":"2026-06-16","to":"2026-08-20","accountSince":"14 Jun 2026","ageDays":65,"dailyRowsMeta":33,"dailyFilled":66},"kpis":{"spend":348.18,"zwrot":535.46,"zysk":187.28,"roas":1.537883,"purchases":9,"checkout":36,"leads":24,"landing":548,"impressions":124007,"clicks":4205,"linkClicks":1782,"reach":65045,"ctr":3.390938,"cpc":0.082801,"cpm":2.807745,"cpp":38.686667,"aov":59.495556,"videoViews":52473,"campaignsLive":3,"campaignsTotal":7,"adsetsLive":33,"adsLive":41,"last7cal":55.22,"leadValueMeta":4408.68,"checkoutValueMeta":6593.09,"winnerSpend":190.77,"winnerRoas":2.806835,"otherSpend":157.41,"todayInflight":{"date":"2026-08-21","spend":19.24,"zwrot":64.92,"purchases":2},"msgClicks":483,"msgSpend":66.28,"messengerClicks":310,"messengerSpend":56.25,"waClicks":173,"waSpend":10.03,"videoNoReturnSpend":91.13},"daily":[{"d":"2026-06-16","s":2.01,"z":0.0,"p":0,"c":23,"r":0.0,"i":715},{"d":"2026-06-17","s":2.89,"z":0.0,"p":0,"c":26,"r":0.0,"i":1149},{"d":"2026-06-18","s":2.3,"z":0.0,"p":0,"c":17,"r":0.0,"i":949},{"d":"2026-06-19","s":1.87,"z":0.0,"p":0,"c":17,"r":0.0,"i":640},{"d":"2026-06-20","s":6.06,"z":0.0,"p":0,"c":56,"r":0.0,"i":1799},{"d":"2026-06-21","s":5.68,"z":0.0,"p":0,"c":82,"r":0.0,"i":1672},{"d":"2026-06-22","s":19.45,"z":0.0,"p":0,"c":152,"r":0.0,"i":4026},{"d":"2026-06-23","s":10.18,"z":0.0,"p":0,"c":137,"r":0.0,"i":2641},{"d":"2026-06-24","s":12.81,"z":0.0,"p":0,"c":123,"r":0.0,"i":3300},{"d":"2026-06-25","s":11.25,"z":0.0,"p":0,"c":105,"r":0.0,"i":2664},{"d":"2026-06-26","s":7.15,"z":0.0,"p":0,"c":70,"r":0.0,"i":1722},{"d":"2026-06-27","s":10.26,"z":0.0,"p":0,"c":63,"r":0.0,"i":2033},{"d":"2026-06-28","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-06-29","s":13.35,"z":0.0,"p":0,"c":144,"r":0.0,"i":3812},{"d":"2026-06-30","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-01","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-02","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-03","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-04","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-05","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-06","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-07","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-08","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-09","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-10","s":16.41,"z":0.0,"p":0,"c":212,"r":0.0,"i":4091},{"d":"2026-07-11","s":5.56,"z":0.0,"p":0,"c":80,"r":0.0,"i":2087},{"d":"2026-07-12","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-13","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-14","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-15","s":21.17,"z":0.0,"p":0,"c":259,"r":0.0,"i":8394},{"d":"2026-07-16","s":4.12,"z":0.0,"p":0,"c":53,"r":0.0,"i":1375},{"d":"2026-07-17","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-18","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-19","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-20","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-21","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-22","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-23","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-24","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-25","s":21.85,"z":0.0,"p":0,"c":170,"r":0.0,"i":6650},{"d":"2026-07-26","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-27","s":11.77,"z":111.04,"p":2,"c":174,"r":9.434155,"i":4726},{"d":"2026-07-28","s":3.64,"z":47.59,"p":1,"c":56,"r":13.074176,"i":1291},{"d":"2026-07-29","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-07-30","s":0.0,"z":128.06,"p":1,"c":0,"r":0.0,"i":0},{"d":"2026-07-31","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-01","s":0.0,"z":0.0,"p":0,"c":0,"r":0.0,"i":0},{"d":"2026-08-02","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-03","s":19.5,"z":0.0,"p":0,"c":249,"r":0.0,"i":12355},{"d":"2026-08-04","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-05","s":21.59,"z":66.68,"p":2,"c":250,"r":3.088467,"i":12967},{"d":"2026-08-06","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-07","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-08","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-09","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-10","s":22.7,"z":0.0,"p":0,"c":326,"r":0.0,"i":13511},{"d":"2026-08-11","s":8.33,"z":0.0,"p":0,"c":150,"r":0.0,"i":4235},{"d":"2026-08-12","s":13.82,"z":34.52,"p":1,"c":256,"r":2.497829,"i":4558},{"d":"2026-08-13","s":17.24,"z":32.17,"p":1,"c":237,"r":1.866009,"i":5207},{"d":"2026-08-14","s":6.28,"z":0.0,"p":0,"c":70,"r":0.0,"i":1696},{"d":"2026-08-15","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-16","s":0,"z":0,"p":0,"c":0,"r":0,"i":0},{"d":"2026-08-17","s":7.86,"z":0.0,"p":0,"c":122,"r":0.0,"i":1742},{"d":"2026-08-18","s":11.33,"z":0.0,"p":0,"c":164,"r":0.0,"i":2695},{"d":"2026-08-19","s":10.04,"z":0.0,"p":0,"c":142,"r":0.0,"i":2357},{"d":"2026-08-20","s":19.71,"z":115.4,"p":1,"c":220,"r":5.854896,"i":6948}],"campaigns":[{"name":"Comino Gozo PL Video Booking 2026-06","status":"ACTIVE","spend":190.77,"zwrot":535.46,"roas":2.806835,"purchases":9,"ctr":6.935723,"cpc":0.06469,"impressions":42519,"clicks":2949,"kind":"sales","msgClicks":0,"cel":"Booking"},{"name":"Comino Gozo PL Messages 2026-06-16","status":"PAUSED","spend":56.25,"zwrot":0.0,"roas":0.0,"purchases":0,"ctr":1.489883,"cpc":0.181452,"impressions":20807,"clicks":310,"kind":"messenger","msgClicks":310,"cel":"Messenger"},{"name":"T01 Blue Lagoon Video Views 3EURd 2026-07","status":"PAUSED","spend":50.66,"zwrot":0.0,"roas":0.0,"purchases":0,"ctr":1.256177,"cpc":0.088566,"impressions":45535,"clicks":572,"kind":"video","msgClicks":0,"cel":"Video"},{"name":"Post: \"Jeśli Malta jest już w planie, nie składaj Comino...\"","status":"PAUSED","spend":30.49,"zwrot":0.0,"roas":0.0,"purchases":0,"ctr":1.60285,"cpc":0.282315,"impressions":6738,"clicks":108,"kind":"video","msgClicks":0,"cel":"Video"},{"name":"GZ5 Gozo after Blue Lagoon Locale WhatsApp Pilot 2026-08","status":"PAUSED","spend":10.03,"zwrot":0.0,"roas":0.0,"purchases":0,"ctr":4.432488,"cpc":0.057977,"impressions":3903,"clicks":173,"kind":"whatsapp","msgClicks":173,"cel":"WhatsApp"},{"name":"MT INTL | IMG6333 | Logistics | VV | 2026-08","status":"ACTIVE","spend":9.98,"zwrot":0.0,"roas":0.0,"purchases":0,"ctr":2.06529,"cpc":0.107312,"impressions":4503,"clicks":93,"kind":"video","msgClicks":0,"cel":"Video"},{"name":"MT | DARIA BUGGY V9 | 8L | VV | BOOK NOW | 2026-08","status":"ACTIVE","spend":0.0,"zwrot":0.0,"roas":0.0,"purchases":0,"ctr":0.0,"cpc":0.0,"impressions":2,"clicks":0,"kind":"video","msgClicks":0,"cel":"Video"}],"ads":[{"name":"UGC Olek Retargeting Sprawdz termin 2026-06","campaign":"Comino Gozo PL Video Booking 2026-06","spend":65.16,"impr":15305,"clicks":1875,"ctr":12.250898,"cpc":0.034752,"p":4,"z":180.05,"r":2.763198},{"name":"UGC Olek F6 Pierwszy raz na Malcie - PL Intent","campaign":"Comino Gozo PL Video Booking 2026-06","spend":19.23,"impr":4137,"clicks":230,"ctr":5.559584,"cpc":0.083609,"p":3,"z":179.76,"r":9.347894},{"name":"UGC Olek F7 Ostatni pełny dzień - PL Intent","campaign":"Comino Gozo PL Video Booking 2026-06","spend":22.77,"impr":5960,"clicks":356,"ctr":5.973154,"cpc":0.063961,"p":2,"z":175.65,"r":7.714098},{"name":"T01 Blue Lagoon Reels Stories Video View 2026-07","campaign":"T01 Blue Lagoon Video Views 3EURd 2026-07","spend":34.25,"impr":26004,"clicks":232,"ctr":0.89217,"cpc":0.147629,"p":0,"z":0.0,"r":0.0},{"name":"UGC Olek F6 Pierwszy raz na Malcie","campaign":"Comino Gozo PL Video Booking 2026-06","spend":33.78,"impr":7723,"clicks":93,"ctr":1.204195,"cpc":0.363226,"p":0,"z":0.0,"r":0.0},{"name":"Post: \"Jeśli Malta jest już w planie, nie składaj Comino...\"","campaign":"Post: \"Jeśli Malta jest już w planie, nie składaj Comino...\"","spend":30.49,"impr":6738,"clicks":108,"ctr":1.60285,"cpc":0.282315,"p":0,"z":0.0,"r":0.0},{"name":"A Koniec urlopu","campaign":"Comino Gozo PL Messages 2026-06-16","spend":22.48,"impr":7874,"clicks":95,"ctr":1.206502,"cpc":0.236632,"p":0,"z":0.0,"r":0.0},{"name":"H Albo plan albo chaos","campaign":"Comino Gozo PL Messages 2026-06-16","spend":21.84,"impr":8349,"clicks":120,"ctr":1.437298,"cpc":0.182,"p":0,"z":0.0,"r":0.0},{"name":"T01 Blue Lagoon Feed Video View 2026-07","campaign":"T01 Blue Lagoon Video Views 3EURd 2026-07","spend":16.41,"impr":19531,"clicks":340,"ctr":1.740822,"cpc":0.048265,"p":0,"z":0.0,"r":0.0},{"name":"UGC Olek F1 Nie zmarnuj dnia","campaign":"Comino Gozo PL Video Booking 2026-06","spend":15.67,"impr":2825,"clicks":62,"ctr":2.19469,"cpc":0.252742,"p":0,"z":0.0,"r":0.0}],"messages":{"note":"Message-button clicks. Meta does not report conversation started.","rows":[{"name":"Comino Gozo PL Messages","cel":"Messenger + WhatsApp","status":"PAUSED","clicks":310,"unique":238,"spend":56.25,"cpc":0.181,"linkClicks":195},{"name":"GZ5 WhatsApp Pilot","cel":"WhatsApp","status":"PAUSED","clicks":173,"unique":160,"spend":10.03,"cpc":0.058,"linkClicks":18}]}};
+
+const COLORS = ["#e8c47a","#3ecfb2","#7eb6ff","#ff8a6b","#c9a0ff","#9ad7c2","#f2d0a4"];
+const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function money(n, d) {
+  d = d == null ? 2 : d;
+  const v = Number(n) || 0;
+  return "$" + v.toLocaleString("en-US", {minimumFractionDigits:d, maximumFractionDigits:d});
+}
+function num(n) { return Math.round(Number(n)||0).toLocaleString("en-US"); }
+function pct(n) { return (Number(n)||0).toFixed(2) + "%"; }
+function roasx(n) {
+  const v = Number(n)||0;
+  if (!v) return "—";
+  return v.toFixed(2) + "x";
+}
+function fmtDate(iso) {
+  const p = iso.split("-");
+  return parseInt(p[2],10) + " " + MONTHS[parseInt(p[1],10)-1] + " " + p[0];
+}
+function shortDate(iso) {
+  const p = iso.split("-");
+  return parseInt(p[2],10) + " " + MONTHS[parseInt(p[1],10)-1];
+}
+
+function esc(s) {
+  return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+
+/* ---------- funnel ---------- */
+(function(){
+  const k = DATA.kpis;
+  const steps = [
+    {n:k.impressions, lab:"Impressions", conv:""},
+    {n:k.clicks, lab:"Clicks", conv:"CTR " + pct(k.ctr)},
+    {n:k.landing, lab:"Landing", conv:(k.landing/k.clicks*100).toFixed(1) + "% of clicks"},
+    {n:k.checkout, lab:"Checkout", conv:(k.checkout/k.landing*100).toFixed(1) + "% of landing"},
+    {n:k.purchases, lab:"Purchases", conv:(k.purchases/k.checkout*100).toFixed(0) + "% of checkout"}
+  ];
+  document.getElementById("funnel").innerHTML = steps.map(function(s,i){
+    return '<div class="step"><div class="n"'+(i===4?' style="color:var(--teal)"':'')+'>'+num(s.n)+'</div><div class="lab">'+s.lab+'</div>'+(s.conv?'<div class="conv">'+s.conv+'</div>':'')+'</div>';
+  }).join("");
+})();
+
+/* ---------- message split ---------- */
+(function(){
+  const el = document.getElementById("msgSplit");
+  if (!el || !DATA.messages) return;
+  el.innerHTML = DATA.messages.rows.map(function(r){
+    const isWa = r.cel.indexOf("WhatsApp") === 0;
+    return '<div class="msg-stat">'+
+      '<div class="lab">'+esc(r.cel)+'</div>'+
+      '<div class="n" style="color:'+(isWa?'#8dffb6':'var(--blue)')+'">'+num(r.clicks)+'</div>'+
+      '<div class="s">'+esc(r.name)+' · '+money(r.spend)+' · CPC '+money(r.cpc,3)+' · unique '+num(r.unique)+' · '+r.status+'</div>'+
+    '</div>';
+  }).join("");
+})();
+
+/* ---------- campaigns table ---------- */
+(function(){
+  const maxZ = Math.max.apply(null, DATA.campaigns.map(function(c){ return c.zwrot; })) || 1;
+  const body = document.getElementById("campBody");
+  const celChip = {sales:'sales', whatsapp:'wa', messenger:'msg', video:'video'};
+  body.innerHTML = DATA.campaigns.map(function(c){
+    const win = c.zwrot > 0;
+    const msg = (c.msgClicks||0) > 0;
+    const w = (c.zwrot / maxZ * 100).toFixed(1);
+    const st = c.status === "ACTIVE"
+      ? '<span class="chip live">LIVE</span>'
+      : '<span class="chip pause">PAUSED</span>';
+    const cel = '<span class="chip '+(celChip[c.kind]||'video')+'">'+esc(c.cel||c.kind||"")+'</span>';
+    return '<tr class="'+(win?"win":"")+'">'+
+      '<td><div class="cname">'+esc(c.name)+'</div></td>'+
+      '<td>'+cel+'</td>'+
+      '<td>'+st+'</td>'+
+      '<td class="num">'+money(c.spend)+'</td>'+
+      '<td class="num '+(msg?"teal":"muted")+'">'+(c.msgClicks?num(c.msgClicks):"—")+'</td>'+
+      '<td class="num '+(win?"teal":"muted")+'">'+(c.zwrot?money(c.zwrot):"$0.00")+'</td>'+
+      '<td><div class="bar"><i style="width:'+w+'%"></i></div></td>'+
+      '<td class="num '+(win?"gold":"muted")+'">'+(c.roas?roasx(c.roas):"—")+'</td>'+
+      '<td class="num">'+(c.purchases||"0")+'</td>'+
+      '<td class="num blue">'+num(c.clicks)+'</td>'+
+      '<td class="num">'+pct(c.ctr)+'</td>'+
+      '<td class="num">'+money(c.cpc,3)+'</td>'+
+    '</tr>';
+  }).join("");
+})();
+
+/* ---------- ads ---------- */
+(function(){
+  const el = document.getElementById("adsList");
+  el.innerHTML = DATA.ads.map(function(a){
+    const buyer = a.z > 0;
+    const topR = buyer
+      ? '<b>'+esc(a.name)+'</b><span class="teal">'+money(a.z)+' return</span>'
+      : '<b>'+esc(a.name)+'</b><span class="muted">'+money(a.spend)+' spend</span>';
+    const metrics = buyer
+      ? '<div class="ad-metrics">'+
+          '<span>Spend <b>'+money(a.spend)+'</b></span>'+
+          '<span>ROAS <b class="gold">'+roasx(a.r)+'</b></span>'+
+          '<span>Purchases <b>'+a.p+'</b></span>'+
+          '<span>CTR <b>'+pct(a.ctr)+'</b></span>'+
+        '</div>'
+      : '<div class="ad-metrics"><span>Spend <b>'+money(a.spend)+'</b></span><span>Return <b class="muted">$0</b></span><span>ROAS <b class="muted">—</b></span><span>Purchases <b>0</b></span><span>CTR <b>'+pct(a.ctr)+'</b></span></div>';
+    return '<div class="ad'+(buyer?' buyer':'')+'">'+
+      '<div class="ad-top">'+topR+'</div>'+
+      '<div class="ad-sub">'+esc(a.campaign)+' · '+num(a.impr)+' impr · '+num(a.clicks)+' clicks</div>'+
+      metrics+
+    '</div>';
+  }).join("");
+})();
+
+/* ---------- donut ---------- */
+(function(){
+  const camps = DATA.campaigns;
+  const total = camps.reduce(function(s,c){ return s+c.spend; }, 0) || 1;
+  const size = 168, cx = 84, cy = 84, r = 62, sw = 20;
+  const C = 2 * Math.PI * r;
+  let offset = 0;
+  const circles = camps.map(function(c, i){
+    const len = (c.spend / total) * C;
+    const dash = len.toFixed(2) + " " + (C - len).toFixed(2);
+    const off = (-offset).toFixed(2);
+    offset += len;
+    return '<circle class="seg" data-i="'+i+'" cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="'+COLORS[i%COLORS.length]+'" stroke-width="'+sw+'" stroke-dasharray="'+dash+'" stroke-dashoffset="'+off+'" transform="rotate(-90 '+cx+' '+cy+')" style="cursor:pointer" pointer-events="stroke"></circle>';
+  }).join("");
+  document.getElementById("donut").innerHTML =
+    '<svg width="'+size+'" height="'+size+'" viewBox="0 0 '+size+' '+size+'" id="donutSvg">'+
+      circles +
+      '<text id="donutN" x="'+cx+'" y="78" text-anchor="middle" fill="#eef6f4" font-size="16" font-family="Georgia, serif">$348</text>'+
+      '<text id="donutL" x="'+cx+'" y="96" text-anchor="middle" fill="#8aa3a0" font-size="10" font-family="ui-sans-serif,system-ui,sans-serif">spend</text>'+
+    '</svg>';
+  document.getElementById("donutLegend").innerHTML = camps.map(function(c,i){
+    const short = c.name.length > 28 ? c.name.slice(0,27) + "…" : c.name;
+    return '<li data-i="'+i+'"><i style="background:'+COLORS[i%COLORS.length]+'"></i><span class="nm" title="'+esc(c.name)+'">'+esc(short)+'</span><b>'+money(c.spend)+'</b></li>';
+  }).join("");
+
+  const tip = document.createElement("div");
+  tip.className = "tip";
+  document.getElementById("donut").style.position = "relative";
+  document.getElementById("donut").appendChild(tip);
+  const nEl = document.getElementById("donutN");
+  const lEl = document.getElementById("donutL");
+
+  function show(i, ev) {
+    const c = camps[i];
+    nEl.textContent = c.zwrot ? money(c.zwrot,0) : money(c.spend,0);
+    lEl.textContent = c.zwrot ? "return" : "spend";
+    tip.style.display = "block";
+    tip.innerHTML = '<div class="td">'+esc(c.name)+'</div>'+
+      '<div class="row"><span>Status</span><b>'+c.status+'</b></div>'+
+      '<div class="row"><span>Goal</span><b>'+esc(c.cel||"")+'</b></div>'+
+      '<div class="row"><span>Spend</span><b class="gold">'+money(c.spend)+'</b></div>'+
+      '<div class="row"><span>Return</span><b class="teal">'+money(c.zwrot)+'</b></div>'+
+      '<div class="row"><span>ROAS</span><b>'+ (c.roas?roasx(c.roas):"—") +'</b></div>'+
+      '<div class="row"><span>Purchases</span><b>'+c.purchases+'</b></div>'+
+      '<div class="row"><span>Clicks</span><b class="blue">'+num(c.clicks)+'</b></div>'+
+      (c.msgClicks ? '<div class="row"><span>Messages</span><b>'+num(c.msgClicks)+'</b></div>' : '');
+    const box = document.getElementById("donut").getBoundingClientRect();
+    let x = ev.clientX - box.left + 12;
+    let y = ev.clientY - box.top + 12;
+    tip.style.left = x + "px";
+    tip.style.top = y + "px";
+  }
+  function hide() {
+    tip.style.display = "none";
+    nEl.textContent = "$348";
+    lEl.textContent = "spend";
+  }
+  Array.prototype.forEach.call(document.querySelectorAll("#donutSvg .seg"), function(el){
+    el.addEventListener("mousemove", function(ev){ show(+el.getAttribute("data-i"), ev); });
+    el.addEventListener("mouseleave", hide);
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("#donutLegend li"), function(el){
+    el.addEventListener("mousemove", function(ev){ show(+el.getAttribute("data-i"), ev); });
+    el.addEventListener("mouseleave", hide);
+  });
+})();
+
+/* ---------- charts ---------- */
+function nearestIndex(x, padL, plotW, n) {
+  if (n <= 1) return 0;
+  const t = (x - padL) / plotW;
+  const i = Math.round(t * (n - 1));
+  return Math.max(0, Math.min(n - 1, i));
+}
+
+function placeTip(tip, canvas, ev) {
+  const box = canvas.parentElement.getBoundingClientRect();
+  const tw = tip.offsetWidth || 188;
+  const th = tip.offsetHeight || 120;
+  let x = ev.clientX - box.left + 14;
+  let y = ev.clientY - box.top - 10;
+  if (x + tw > box.width - 8) x = ev.clientX - box.left - tw - 14;
+  if (y + th > box.height - 8) y = box.height - th - 8;
+  if (y < 4) y = 4;
+  if (x < 4) x = 4;
+  tip.style.left = x + "px";
+  tip.style.top = y + "px";
+}
+
+function tooltipHTML(day, extra) {
+  const zeroSpend = !(day.s > 0);
+  const roasStr = zeroSpend ? "—" : roasx(day.r || (day.s ? day.z/day.s : 0));
+  let note = "";
+  if (zeroSpend && day.z > 0) note = '<div class="note">Attributed with no spend that day</div>';
+  else if (zeroSpend) note = '<div class="note" style="color:var(--dim)">No spend (calendar gap or $0)</div>';
+  return '<div class="td">'+fmtDate(day.d)+'</div>'+
+    '<div class="row"><span>Spend</span><b class="gold">'+money(day.s)+'</b></div>'+
+    '<div class="row"><span>Purchases</span><b>'+day.p+'</b></div>'+
+    '<div class="row"><span>Return</span><b class="teal">'+money(day.z)+'</b></div>'+
+    '<div class="row"><span>ROAS</span><b>'+roasStr+'</b></div>'+
+    '<div class="row"><span>Clicks</span><b class="blue">'+num(day.c)+'</b></div>'+
+    (extra || "") +
+    note;
+}
+
+function niceMax(v) {
+  if (v <= 0) return 1;
+  const exp = Math.pow(10, Math.floor(Math.log10(v)));
+  const n = v / exp;
+  const k = n <= 1 ? 1 : n <= 1.5 ? 1.5 : n <= 2 ? 2 : n <= 3 ? 3 : n <= 5 ? 5 : n <= 7 ? 7 : 10;
+  return k * exp;
+}
+
+function attachMoneyChart(canvas, tip) {
+  const days = DATA.daily;
+  const n = days.length;
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+  let hover = -1;
+  let mode = "kombi";
+  try { mode = localStorage.getItem("mt-chart-mode") || "kombi"; } catch (e) {}
+  if (["kombi","suma","indeks","kalendarz"].indexOf(mode) < 0) mode = "kombi";
+
+  const cum = [];
+  let cs = 0, cz = 0, cc = 0;
+  days.forEach(function(d) {
+    cs += d.s; cz += d.z; cc += d.c;
+    cum.push({s: cs, z: cz, c: cc, p: d.p, day: d});
+  });
+  const maxCum = Math.max(cs, cz) * 1.06;
+  const maxSraw = Math.max.apply(null, days.map(function(d){ return d.s; })) || 1;
+  const maxZraw = Math.max.apply(null, days.map(function(d){ return d.z; })) || 1;
+  const maxCraw = Math.max.apply(null, days.map(function(d){ return d.c; })) || 1;
+
+  const DOW = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  function dowMon(iso) {
+    const dt = new Date(iso + "T12:00:00Z");
+    return (dt.getUTCDay() + 6) % 7;
+  }
+
+  const padLine = {l: 46, r: 46, t: 18, b: 32};
+  const padCal = {l: 36, r: 12, t: 22, b: 10};
+
+  const legendEl = document.getElementById("chartLegend");
+  const blurbEl = document.getElementById("chartBlurb");
+  const footEl = document.getElementById("chartFoot");
+  const switchEl = document.getElementById("chartSwitch");
+
+  const META = {
+    kombi: {
+      legend: [
+        ["var(--gold)","Spend"],
+        ["var(--teal)","Return"],
+        ["var(--blue)","Clicks"],
+        ["var(--coral)","Purchase"]
+      ],
+      blurb: "Hover a day. Spend and click lines stay continuous across gaps.",
+      foot: "16 Jun → 20 Aug · gold = spend, blue = clicks (own scale), bars = return."
+    },
+    suma: {
+      legend: [
+        ["var(--gold)","Spend cumulative"],
+        ["var(--teal)","Return cumulative"],
+        ["var(--coral)","Purchase day"]
+      ],
+      blurb: "Cash race. Teal overtakes gold from the first booking and never gives it back.",
+      foot: "End: spend $348 · return $535 · profit $187. Fill between the lines = running profit."
+    },
+    indeks: {
+      legend: [
+        ["var(--gold)","Spend (0–100)"],
+        ["var(--teal)","Return (0–100)"],
+        ["var(--blue)","Clicks (0–100)"]
+      ],
+      blurb: "Same shape, three scales. See if clicks track spend, and if return lags by days.",
+      foot: "Each series = % of its own max. 100 clicks = 326 (10 Aug), 100 return = $128 (30 Jul)."
+    },
+    kalendarz: {
+      legend: [
+        ["var(--gold)","Spend (brightness)"],
+        ["var(--coral)","Purchase"],
+        ["var(--blue)","Clicks in cell"]
+      ],
+      blurb: "Week starts Monday. Darker gold = more spend. Dot = booking.",
+      foot: "Calendar gaps stay empty. 30 Jul lights up with return and no spend (attribution)."
+    }
+  };
+
+  function applyChrome() {
+    const m = META[mode];
+    legendEl.innerHTML = m.legend.map(function(x){
+      return '<span><i class="dot" style="background:'+x[0]+'"></i> '+x[1]+'</span>';
+    }).join("");
+    blurbEl.textContent = m.blurb;
+    footEl.textContent = m.foot;
+    Array.prototype.forEach.call(switchEl.querySelectorAll("button"), function(b){
+      b.className = b.getAttribute("data-mode") === mode ? "on" : "";
+    });
+    canvas.style.height = mode === "kalendarz" ? "320px" : "260px";
+  }
+
+  function size() {
+    const w = canvas.clientWidth || canvas.parentElement.clientWidth || 800;
+    const h = canvas.clientHeight || (mode === "kalendarz" ? 320 : 260);
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return {ctx: ctx, w: w, h: h};
+  }
+
+  function xAt(i, w, pad) {
+    const plotW = w - pad.l - pad.r;
+    if (n <= 1) return pad.l + plotW / 2;
+    return pad.l + i * plotW / (n - 1);
+  }
+
+  function calLayout(w, h) {
+    const pad = padCal;
+    const plotW = w - pad.l - pad.r;
+    const plotH = h - pad.t - pad.b;
+    const firstDow = dowMon(days[0].d);
+    const cells = n + firstDow;
+    const rows = Math.ceil(cells / 7);
+    const gap = 4;
+    const cw = (plotW - gap * 6) / 7;
+    const ch = Math.min(cw, (plotH - 16 - gap * (rows - 1)) / rows);
+    return {pad: pad, cw: cw, ch: ch, gap: gap, rows: rows, firstDow: firstDow, originX: pad.l, originY: pad.t + 16};
+  }
+
+  function cellOf(i, L) {
+    const slot = L.firstDow + i;
+    const col = slot % 7;
+    const row = Math.floor(slot / 7);
+    return {
+      x: L.originX + col * (L.cw + L.gap),
+      y: L.originY + row * (L.ch + L.gap),
+      w: L.cw, h: L.ch
+    };
+  }
+
+  function hitCalendar(mx, my, w, h) {
+    const L = calLayout(w, h);
+    for (let i = 0; i < n; i++) {
+      const c = cellOf(i, L);
+      if (mx >= c.x && mx <= c.x + c.w && my >= c.y && my <= c.y + c.h) return i;
+    }
+    return -1;
+  }
+
+  function pointsOf(getV, getY, w, pad) {
+    const pts = [];
+    days.forEach(function(d, i) {
+      if (getV(d, i) > 0) pts.push({x: xAt(i, w, pad), y: getY(getV(d, i)), i: i});
+    });
+    return pts;
+  }
+  function strokeConnected(ctx, pts, color, width) {
+    if (pts.length < 1) return;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.stroke();
+  }
+  function fillUnder(ctx, pts, base, color) {
+    if (!pts.length) return;
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, base);
+    pts.forEach(function(pt){ ctx.lineTo(pt.x, pt.y); });
+    ctx.lineTo(pts[pts.length - 1].x, base);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+  }
+
+  function drawGrid(ctx, w, h, pad, ticks, leftFn, rightFn) {
+    const plotH = h - pad.t - pad.b;
+    ctx.strokeStyle = "rgba(255,255,255,0.06)";
+    ctx.lineWidth = 1;
+    ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+    for (let t = 0; t <= ticks; t++) {
+      const y = pad.t + plotH * t / ticks;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+      if (leftFn) {
+        ctx.fillStyle = "rgba(232,196,122,.75)";
+        ctx.textAlign = "right";
+        ctx.fillText(leftFn(1 - t / ticks), pad.l - 6, y + 3);
+      }
+      if (rightFn) {
+        ctx.fillStyle = "rgba(62,207,178,.85)";
+        ctx.textAlign = "left";
+        ctx.fillText(rightFn(1 - t / ticks), w - pad.r + 6, y + 3);
+      }
+    }
+    ctx.fillStyle = "#8aa3a0";
+    ctx.textAlign = "center";
+    days.forEach(function(d, i) {
+      const dayNum = parseInt(d.d.slice(8), 10);
+      if (i === 0 || i === n - 1 || dayNum === 1 || i % 7 === 0) {
+        ctx.fillText(shortDate(d.d), xAt(i, w, pad), h - 8);
+      }
+    });
+  }
+
+  function mark(ctx, x, y, fill, hair, padL) {
+    ctx.setLineDash([3, 4]);
+    ctx.strokeStyle = hair;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(padL, y); ctx.lineTo(x, y); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = fill; ctx.fill();
+    ctx.strokeStyle = "#071018"; ctx.lineWidth = 2; ctx.stroke();
+  }
+
+  function draw() {
+    const S = size();
+    const ctx = S.ctx, w = S.w, h = S.h;
+    ctx.clearRect(0, 0, w, h);
+
+    if (mode === "kalendarz") {
+      const L = calLayout(w, h);
+      ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillStyle = "#8aa3a0";
+      ctx.textAlign = "center";
+      DOW.forEach(function(lab, col) {
+        ctx.fillText(lab, L.originX + col * (L.cw + L.gap) + L.cw / 2, L.originY - 6);
+      });
+      days.forEach(function(d, i) {
+        const c = cellOf(i, L);
+        const t = d.s > 0 ? Math.max(0.18, d.s / maxSraw) : 0;
+        ctx.fillStyle = d.s > 0
+          ? "rgba(232,196,122," + (0.12 + 0.72 * t).toFixed(3) + ")"
+          : (d.z > 0 ? "rgba(62,207,178,0.22)" : "rgba(255,255,255,0.035)");
+        const r = 5;
+        ctx.beginPath();
+        ctx.moveTo(c.x + r, c.y);
+        ctx.arcTo(c.x + c.w, c.y, c.x + c.w, c.y + c.h, r);
+        ctx.arcTo(c.x + c.w, c.y + c.h, c.x, c.y + c.h, r);
+        ctx.arcTo(c.x, c.y + c.h, c.x, c.y, r);
+        ctx.arcTo(c.x, c.y, c.x + c.w, c.y, r);
+        ctx.closePath();
+        ctx.fill();
+        if (hover === i) {
+          ctx.strokeStyle = "rgba(238,246,244,0.7)";
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+        }
+        const dayNum = parseInt(d.d.slice(8), 10);
+        ctx.fillStyle = d.s > 0 || d.z > 0 ? "#eef6f4" : "#5d7370";
+        ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+        ctx.textAlign = "left";
+        ctx.fillText(String(dayNum), c.x + 5, c.y + 12);
+        if (d.c > 0) {
+          ctx.fillStyle = "#7eb6ff";
+          ctx.font = "9px ui-sans-serif, system-ui, sans-serif";
+          ctx.textAlign = "right";
+          ctx.fillText(String(d.c), c.x + c.w - 5, c.y + c.h - 5);
+        }
+        if (d.p > 0) {
+          ctx.beginPath();
+          ctx.arc(c.x + c.w / 2, c.y + c.h / 2 + 2, 4, 0, Math.PI * 2);
+          ctx.fillStyle = "#ff8a6b";
+          ctx.fill();
+        }
+      });
+      return;
+    }
+
+    const pad = padLine;
+    const plotH = h - pad.t - pad.b;
+    const base = pad.t + plotH;
+
+    if (mode === "kombi") {
+      const maxS = niceMax(maxSraw * 1.12);
+      const maxZ = niceMax(maxZraw * 1.08);
+      const maxC = niceMax(maxCraw * 1.08);
+      function yS(v) { return pad.t + (1 - v / maxS) * plotH; }
+      function yZ(v) { return pad.t + (1 - v / maxZ) * plotH; }
+      function yC(v) { return pad.t + (1 - v / maxC) * plotH; }
+      drawGrid(ctx, w, h, pad, 4,
+        function(p){ return "$" + (maxS * p).toFixed(0); },
+        function(p){ return "$" + (maxZ * p).toFixed(0); });
+      const barW = Math.max(2.5, (w - pad.l - pad.r) / n * 0.55);
+      days.forEach(function(d, i) {
+        if (!(d.z > 0)) return;
+        const x = xAt(i, w, pad);
+        ctx.fillStyle = d.p > 0 ? "rgba(62,207,178,0.58)" : "rgba(62,207,178,0.32)";
+        ctx.fillRect(x - barW / 2, yZ(d.z), barW, Math.max(1, base - yZ(d.z)));
+      });
+      const spendPts = pointsOf(function(d){ return d.s; }, yS, w, pad);
+      const clickPts = pointsOf(function(d){ return d.c; }, yC, w, pad);
+      fillUnder(ctx, spendPts, base, "rgba(232,196,122,0.12)");
+      strokeConnected(ctx, spendPts, "#e8c47a", 2.25);
+      strokeConnected(ctx, clickPts, "#7eb6ff", 1.85);
+      ctx.fillStyle = "rgba(126,182,255,.85)";
+      ctx.textAlign = "right";
+      ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+      ctx.fillText(Math.round(maxC) + " clicks", w - pad.r - 4, pad.t + 10);
+      days.forEach(function(d, i) {
+        if (!(d.p > 0)) return;
+        ctx.beginPath();
+        ctx.arc(xAt(i, w, pad), yZ(d.z), 4.2, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff8a6b";
+        ctx.fill();
+      });
+      if (hover >= 0) {
+        const x = xAt(hover, w, pad);
+        const d = days[hover];
+        ctx.strokeStyle = "rgba(238,246,244,0.35)";
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, base); ctx.stroke();
+        mark(ctx, x, yS(d.s), "#e8c47a", "rgba(232,196,122,0.35)", pad.l);
+        mark(ctx, x, yZ(d.z), "#3ecfb2", "rgba(62,207,178,0.35)", pad.l);
+        mark(ctx, x, yC(d.c), "#7eb6ff", "rgba(126,182,255,0.4)", pad.l);
+      }
+      return;
+    }
+
+    if (mode === "suma") {
+      const maxV = niceMax(maxCum);
+      function yV(v) { return pad.t + (1 - v / maxV) * plotH; }
+      drawGrid(ctx, w, h, pad, 4,
+        function(p){ return "$" + (maxV * p).toFixed(0); },
+        null);
+      const spendPts = days.map(function(d, i){ return {x: xAt(i, w, pad), y: yV(cum[i].s)}; });
+      const zwrotPts = days.map(function(d, i){ return {x: xAt(i, w, pad), y: yV(cum[i].z)}; });
+      ctx.beginPath();
+      ctx.moveTo(spendPts[0].x, spendPts[0].y);
+      spendPts.forEach(function(pt){ ctx.lineTo(pt.x, pt.y); });
+      for (let i = zwrotPts.length - 1; i >= 0; i--) ctx.lineTo(zwrotPts[i].x, zwrotPts[i].y);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(62,207,178,0.18)";
+      ctx.fill();
+      fillUnder(ctx, spendPts, base, "rgba(232,196,122,0.10)");
+      strokeConnected(ctx, spendPts, "#e8c47a", 2.3);
+      strokeConnected(ctx, zwrotPts, "#3ecfb2", 2.3);
+      days.forEach(function(d, i) {
+        if (!(d.p > 0)) return;
+        ctx.beginPath();
+        ctx.arc(xAt(i, w, pad), yV(cum[i].z), 4.4, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff8a6b";
+        ctx.fill();
+      });
+      if (hover >= 0) {
+        const x = xAt(hover, w, pad);
+        ctx.strokeStyle = "rgba(238,246,244,0.35)";
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, base); ctx.stroke();
+        mark(ctx, x, yV(cum[hover].s), "#e8c47a", "rgba(232,196,122,0.35)", pad.l);
+        mark(ctx, x, yV(cum[hover].z), "#3ecfb2", "rgba(62,207,178,0.35)", pad.l);
+      }
+      return;
+    }
+
+    if (mode === "indeks") {
+      function yI(v) { return pad.t + (1 - v / 100) * plotH; }
+      drawGrid(ctx, w, h, pad, 4,
+        function(p){ return Math.round(100 * p) + ""; },
+        null);
+      const spendPts = pointsOf(function(d){ return d.s ? 100 * d.s / maxSraw : 0; }, yI, w, pad);
+      const clickPts = pointsOf(function(d){ return d.c ? 100 * d.c / maxCraw : 0; }, yI, w, pad);
+      const zwrotPts = pointsOf(function(d){ return d.z ? 100 * d.z / maxZraw : 0; }, yI, w, pad);
+      strokeConnected(ctx, spendPts, "#e8c47a", 2.2);
+      strokeConnected(ctx, clickPts, "#7eb6ff", 1.9);
+      strokeConnected(ctx, zwrotPts, "#3ecfb2", 2.2);
+      days.forEach(function(d, i) {
+        if (!(d.p > 0)) return;
+        ctx.beginPath();
+        ctx.arc(xAt(i, w, pad), yI(100 * d.z / maxZraw), 4.2, 0, Math.PI * 2);
+        ctx.fillStyle = "#ff8a6b";
+        ctx.fill();
+      });
+      if (hover >= 0) {
+        const x = xAt(hover, w, pad);
+        const d = days[hover];
+        ctx.strokeStyle = "rgba(238,246,244,0.35)";
+        ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, base); ctx.stroke();
+        mark(ctx, x, yI(d.s ? 100 * d.s / maxSraw : 0), "#e8c47a", "rgba(232,196,122,0.35)", pad.l);
+        mark(ctx, x, yI(d.z ? 100 * d.z / maxZraw : 0), "#3ecfb2", "rgba(62,207,178,0.35)", pad.l);
+        mark(ctx, x, yI(d.c ? 100 * d.c / maxCraw : 0), "#7eb6ff", "rgba(126,182,255,0.4)", pad.l);
+      }
+    }
+  }
+
+  function extraTip(i) {
+    if (mode === "suma") {
+      const g = cum[i];
+      const zysk = g.z - g.s;
+      return '<div class="row"><span>Spend Σ</span><b class="gold">'+money(g.s)+'</b></div>'+
+        '<div class="row"><span>Return Σ</span><b class="teal">'+money(g.z)+'</b></div>'+
+        '<div class="row"><span>Profit Σ</span><b>'+money(zysk)+'</b></div>';
+    }
+    if (mode === "indeks") {
+      const d = days[i];
+      return '<div class="row"><span>Spend idx</span><b class="gold">'+(d.s?Math.round(100*d.s/maxSraw):0)+'</b></div>'+
+        '<div class="row"><span>Return idx</span><b class="teal">'+(d.z?Math.round(100*d.z/maxZraw):0)+'</b></div>'+
+        '<div class="row"><span>Click idx</span><b class="blue">'+(d.c?Math.round(100*d.c/maxCraw):0)+'</b></div>';
+    }
+    return "";
+  }
+
+  function onMove(ev) {
+    const rect = canvas.getBoundingClientRect();
+    const mx = ev.clientX - rect.left;
+    const my = ev.clientY - rect.top;
+    if (mode === "kalendarz") {
+      hover = hitCalendar(mx, my, rect.width, rect.height);
+    } else {
+      hover = nearestIndex(mx, padLine.l, rect.width - padLine.l - padLine.r, n);
+    }
+    draw();
+    if (hover < 0) { tip.style.display = "none"; return; }
+    tip.style.display = "block";
+    tip.innerHTML = tooltipHTML(days[hover], extraTip(hover));
+    placeTip(tip, canvas, ev);
+  }
+  function onLeave() {
+    hover = -1;
+    draw();
+    tip.style.display = "none";
+  }
+
+  Array.prototype.forEach.call(switchEl.querySelectorAll("button"), function(b){
+    b.addEventListener("click", function(){
+      mode = b.getAttribute("data-mode");
+      try { localStorage.setItem("mt-chart-mode", mode); } catch (e) {}
+      hover = -1;
+      tip.style.display = "none";
+      applyChrome();
+      draw();
+    });
+  });
+
+  canvas.addEventListener("mousemove", onMove);
+  canvas.addEventListener("mouseleave", onLeave);
+  window.addEventListener("resize", draw);
+  applyChrome();
+  draw();
+}
+
+function attachChart(canvas, tip, kind) {
+  const days = DATA.daily;
+  const n = days.length;
+  const pad = {l: 46, r: 46, t: 18, b: 32};
+  let hover = -1;
+  const dpr = Math.max(1, window.devicePixelRatio || 1);
+
+  function size() {
+    const w = canvas.clientWidth || canvas.parentElement.clientWidth || 800;
+    const h = canvas.clientHeight || 200;
+    canvas.width = Math.round(w * dpr);
+    canvas.height = Math.round(h * dpr);
+    const ctx = canvas.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    return {ctx: ctx, w: w, h: h};
+  }
+
+  function xAt(i, w) {
+    const plotW = w - pad.l - pad.r;
+    if (n <= 1) return pad.l + plotW / 2;
+    return pad.l + i * plotW / (n - 1);
+  }
+
+  function draw() {
+    const S = size();
+    const ctx = S.ctx, w = S.w, h = S.h;
+    ctx.clearRect(0, 0, w, h);
+    const plotW = w - pad.l - pad.r;
+    const plotH = h - pad.t - pad.b;
+    const base = pad.t + plotH;
+    const maxR = niceMax(Math.max.apply(null, days.map(function(d){ return d.s > 0 ? d.r : 0; })) * 1.08);
+    function yR(v) { return pad.t + (1 - v / maxR) * plotH; }
+
+    ctx.strokeStyle = "rgba(255,255,255,0.06)";
+    ctx.lineWidth = 1;
+    ctx.font = "10px ui-sans-serif, system-ui, sans-serif";
+    const ticks = 4;
+    for (let t = 0; t <= ticks; t++) {
+      const y = pad.t + plotH * t / ticks;
+      ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(w - pad.r, y); ctx.stroke();
+      const rv = maxR * (1 - t / ticks);
+      ctx.fillStyle = "#8aa3a0";
+      ctx.textAlign = "right";
+      ctx.fillText(rv.toFixed(1) + "x", pad.l - 6, y + 3);
+    }
+    ctx.fillStyle = "#8aa3a0";
+    ctx.textAlign = "center";
+    days.forEach(function(d, i) {
+      const dayNum = parseInt(d.d.slice(8), 10);
+      if (i === 0 || i === n - 1 || dayNum === 1 || i % 7 === 0) {
+        ctx.fillText(shortDate(d.d), xAt(i, w), h - 8);
+      }
+    });
+
+    const y1 = yR(1);
+    ctx.setLineDash([4, 4]);
+    ctx.strokeStyle = "rgba(255,255,255,0.28)";
+    ctx.beginPath(); ctx.moveTo(pad.l, y1); ctx.lineTo(w - pad.r, y1); ctx.stroke();
+    const yAcc = yR(DATA.kpis.roas);
+    ctx.strokeStyle = "rgba(232,196,122,0.7)";
+    ctx.beginPath(); ctx.moveTo(pad.l, yAcc); ctx.lineTo(w - pad.r, yAcc); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = "rgba(232,196,122,.85)";
+    ctx.textAlign = "left";
+    ctx.fillText("1.54x", pad.l + 4, yAcc - 4);
+
+    const barW = Math.max(2, plotW / n * 0.7);
+    days.forEach(function(d, i) {
+      const x = xAt(i, w);
+      if (d.s > 0) {
+        const y = yR(d.r);
+        ctx.fillStyle = d.r >= 1 ? "rgba(62,207,178,0.7)" : "rgba(255,138,107,0.55)";
+        ctx.fillRect(x - barW / 2, y, barW, Math.max(1, base - y));
+      } else if (d.z > 0) {
+        ctx.fillStyle = "#3ecfb2";
+        ctx.beginPath();
+        ctx.moveTo(x, yR(maxR * 0.92));
+        ctx.lineTo(x - 4, yR(maxR * 0.92) + 8);
+        ctx.lineTo(x + 4, yR(maxR * 0.92) + 8);
+        ctx.closePath();
+        ctx.fill();
+      }
+    });
+
+    if (hover >= 0) {
+      const x = xAt(hover, w);
+      ctx.strokeStyle = "rgba(238,246,244,0.35)";
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(x, pad.t); ctx.lineTo(x, base); ctx.stroke();
+      const d = days[hover];
+      if (d.s > 0) {
+        ctx.beginPath(); ctx.arc(x, yR(d.r), 5, 0, Math.PI * 2);
+        ctx.fillStyle = "#e8c47a"; ctx.fill();
+        ctx.strokeStyle = "#071018"; ctx.lineWidth = 2; ctx.stroke();
+      }
+    }
+  }
+
+  function onMove(ev) {
+    const rect = canvas.getBoundingClientRect();
+    hover = nearestIndex(ev.clientX - rect.left, pad.l, rect.width - pad.l - pad.r, n);
+    draw();
+    tip.style.display = "block";
+    tip.innerHTML = tooltipHTML(days[hover]);
+    placeTip(tip, canvas, ev);
+  }
+  function onLeave() {
+    hover = -1;
+    draw();
+    tip.style.display = "none";
+  }
+
+  canvas.addEventListener("mousemove", onMove);
+  canvas.addEventListener("mouseleave", onLeave);
+  window.addEventListener("resize", draw);
+  draw();
+}
+
+attachMoneyChart(document.getElementById("chartMoney"), document.getElementById("tipMoney"));
+attachChart(document.getElementById("chartRoas"), document.getElementById("tipRoas"), "roas");
+</script>
+</body>
+</html>
